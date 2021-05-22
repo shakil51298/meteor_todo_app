@@ -1,9 +1,8 @@
 import React from 'react';
 
 
-export const Task = ({tasks}) => {
-    
+export const Task = ({task}) => {
     return (
-        <li>{tasks.text}</li>
+        <li>{task.text}</li>
     );
 };
