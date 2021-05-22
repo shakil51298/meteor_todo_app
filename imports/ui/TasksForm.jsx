@@ -2,26 +2,30 @@ import React, { useState } from 'react';
 import { TasksCollection } from '../api/TasksCollection';
 
 const TasksForm = () => {
-    const [taskText, setTaskText] = useState('');
-    console.log(taskText);
+    const [text, setText] = useState("");
 
     // insert to db
     const handleSubmit = e => {
         e.preventDefault();
 
-        if (!taskText) return;
+        if (!text) return;
 
         TasksCollection.insert({
-            taskText: taskText.trim(),
+            text: text.trim(),
             createdAt: new Date()
         });
-        setTaskText("");
+
+        setText("");
     };
     return (
-        <form onSubmit={handleSubmit} action="" className="task-form border p-3 w-50 text-center shadow mb-3 rounded">
-            <input onChange={(e) => setTaskText(e.target.value)} className="form-control w-100" type="text" placeholder="type to add new tasks" />
-            <br />
-            <button className="btn btn-danger" type="submit">Add Task</button>
+        <form className="task-form" onSubmit={handleSubmit}>
+            <input
+                type="text"
+                placeholder="Type to add new tasks"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            />
+            <button type="submit">Add Task</button>
         </form>
     );
 };
